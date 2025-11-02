@@ -1,12 +1,22 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-generator client {
-  provider = "prisma-client"
-  output   = "../app/generated/prisma"
-}
+// prisma/schema.prisma
 
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Block {
+  id           Int      @id @default(autoincrement())
+  type         String
+  name         String
+  image_source String?  @map("image_source")
+  content      Json?
+  width        Int?
+  height       Int?
+  
+  @@map("blocks") 
 }
